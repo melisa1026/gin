@@ -15,7 +15,7 @@ public class LLMConfig {
         		+ "\n"
         		+ "```\n")), 
 		
-		MEDIUM(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
+		ORIGINAL(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
         		+ "```\n"
         		+ PromptTag.DESTINATION.withEscape()
         		+ "\n"
@@ -23,8 +23,35 @@ public class LLMConfig {
         		+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")), 
-		
+                + "label all code as java.")),
+
+		OPTIMIZED(new PromptTemplate("Provide " + PromptTag.COUNT.withEscape() + " optimized Java implementations of the following method.\n" +
+				"Focus on reducing runtime complexity and memory usage.\n"
+				+ "```\n"
+				+ PromptTag.DESTINATION.withEscape()
+				+ "\n"
+				+ "```\n"
+				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+				+ "Wrap all code in curly braces, if it is not already."
+				+ "Do not include any method or class declarations."
+				+ "label all code as java.")),
+
+		INSISTENT(new PromptTemplate("Rewrite " + PromptTag.COUNT.withEscape() + " Java code snippets in a way that a highly " +
+				"experienced, top-performing \"10x engineer\" would.  \n" +
+				"\n" +
+				"Aim for code that is not just functional, but also \n" +
+				"exceptionally  efficient, robust, and  concise, even if \n" +
+				"it requires using advanced Java features or less commonly\n" +
+				"known techniques.\n"
+				+ "```\n"
+				+ PromptTag.DESTINATION.withEscape()
+				+ "\n"
+				+ "```\n"
+				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+				+ "Wrap all code in curly braces, if it is not already."
+				+ "Do not include any method or class declarations."
+				+ "label all code as java.")),
+
 		DETAILED(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
         		+ "```\n"
         		+ PromptTag.DESTINATION.withEscape()
@@ -82,7 +109,7 @@ public class LLMConfig {
     // default for langchain4j
     public static double temperature = 0.7;
     
-    public static PromptType defaultPromptType = PromptType.MEDIUM;
+    public static PromptType defaultPromptType = PromptType.ORIGINAL;
     
     public static PromptTemplate defaultPromptTemplate = null;
     
