@@ -15,7 +15,7 @@ public class LLMConfig {
         		+ "\n"
         		+ "```\n")), 
 		
-		ORIGINAL(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
+		MEDIUM(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
         		+ "```\n"
         		+ PromptTag.DESTINATION.withEscape()
         		+ "\n"
