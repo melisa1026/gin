@@ -15,7 +15,7 @@ public class LLMConfig {
         		+ "\n"
         		+ "```\n")), 
 		
-		ORIGINAL(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
+		MEDIUM(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
         		+ "```\n"
         		+ PromptTag.DESTINATION.withEscape()
         		+ "\n"
@@ -76,7 +76,31 @@ public class LLMConfig {
         		+ "```\n"
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")), 
+                + "label all code as java.")),
+
+		SPECIFIC_VARIANTS(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of the following Java method.\n" +
+				"\n" +
+				"Each implementation should try to improve on one different aspect (speed, memory, parallelism, readability, minimal dependencies).\n" +
+				"```\n"
+				+ PromptTag.DESTINATION.withEscape()
+				+ "\n"
+				+ "```\n"
+				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+				+ "Wrap all code in curly braces, if it is not already."
+				+ "Do not include any method or class declarations."
+				+ "label all code as java.")),
+
+		GENERAL_VARIANTS(new PromptTemplate("Rewrite this Java method in " + PromptTag.COUNT.withEscape() + " different ways. " +
+				"Each version should be an improvement in some way. Make each one different.\n" +
+				"```\n"
+				+ PromptTag.DESTINATION.withEscape()
+				+ "\n"
+				+ "```\n"
+				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+				+ "Wrap all code in curly braces, if it is not already."
+				+ "Do not include any method or class declarations."
+				+ "label all code as java.")),
+
 
 
 		MASKED(new PromptTemplate("Please replace <<PLACEHOLDER>> sign in the function below with meaningfull implementation. \n"
@@ -109,7 +133,7 @@ public class LLMConfig {
     // default for langchain4j
     public static double temperature = 0.7;
     
-    public static PromptType defaultPromptType = PromptType.ORIGINAL;
+    public static PromptType defaultPromptType = PromptType.MEDIUM;
     
     public static PromptTemplate defaultPromptTemplate = null;
     
