@@ -156,7 +156,8 @@ public class LLMReplaceStatement extends StatementEdit {
 	    	tagReplacements.put(PromptTag.COUNT, Integer.toString(count));
 	    	tagReplacements.put(PromptTag.DESTINATION, destination.toString());
 	    	tagReplacements.put(PromptTag.PROJECT, LLMConfig.projectName);
-	
+			tagReplacements.put(PromptTag.HINT, sourceFile.toString());
+
 	    	String prompt = promptTemplate.replaceTags(tagReplacements);
 	
 	    	Logger.info("============");

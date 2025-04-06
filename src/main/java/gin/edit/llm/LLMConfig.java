@@ -7,142 +7,160 @@ import gin.edit.llm.PromptTemplate.PromptTag;
 
 public class LLMConfig {
 
-	/** the following are some default template prompts */
-	public enum PromptType {
-		SIMPLE(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " implementations of this:"
-        		+ "```\n"
-        		+ PromptTag.DESTINATION.withEscape()
-        		+ "\n"
-        		+ "```\n")), 
-		
-		MEDIUM(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
-        		+ "```\n"
-        		+ PromptTag.DESTINATION.withEscape()
-        		+ "\n"
-        		+ "```\n"
-        		+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+    /**
+     * the following are some default template prompts
+     */
+    public enum PromptType {
+        SIMPLE(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " implementations of this:"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n")),
+
+        MEDIUM(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
                 + "label all code as java.")),
 
-		OPTIMIZED(new PromptTemplate("Provide " + PromptTag.COUNT.withEscape() + " optimized Java implementations of the following method.\n" +
-				"Focus on reducing runtime complexity and memory usage.\n"
-				+ "```\n"
-				+ PromptTag.DESTINATION.withEscape()
-				+ "\n"
-				+ "```\n"
-				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-				+ "Wrap all code in curly braces, if it is not already."
-				+ "Do not include any method or class declarations."
-				+ "label all code as java.")),
-
-		INSISTENT(new PromptTemplate("Rewrite " + PromptTag.COUNT.withEscape() + " Java code snippets in a way that a highly " +
-				"experienced, top-performing \"10x engineer\" would.  \n" +
-				"\n" +
-				"Aim for code that is not just functional, but also \n" +
-				"exceptionally  efficient, robust, and  concise, even if \n" +
-				"it requires using advanced Java features or less commonly\n" +
-				"known techniques.\n"
-				+ "```\n"
-				+ PromptTag.DESTINATION.withEscape()
-				+ "\n"
-				+ "```\n"
-				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-				+ "Wrap all code in curly braces, if it is not already."
-				+ "Do not include any method or class declarations."
-				+ "label all code as java.")),
-
-		DETAILED(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
-        		+ "```\n"
-        		+ PromptTag.DESTINATION.withEscape()
-        		+ "\n"
-        		+ "```\n"
-        		+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-        		+ "In the org.jcodec.scale.BaseResampler class, the following change was helpful. I changed this:"
-        		+ "```\n"
-        		+ "	if (temp == null) {"
-        		+ "		temp = new int[toSize.getWidth() * (fromSize.getHeight() + nTaps())];"
-        		+ "		tempBuffers.set(temp);"
-        		+ "	}"
-        		+ "```\n"
-        		+ "into this:"
-        		+ "```\n"
-        		+ "	if (temp == null) {"
-        		+ "		if (scaleFactorX >= 0)"
-        		+ "			return;"
-        		+ "		temp = new int[toSize.getWidth() * (fromSize.getHeight() + nTaps())];"
-        		+ "		tempBuffers.set(temp);"
-        		+ "	}"
-        		+ "```\n"
+        OPTIMIZED(new PromptTemplate("Provide " + PromptTag.COUNT.withEscape() + " optimized Java implementations of the following method.\n" +
+                "Focus on reducing runtime complexity and memory usage.\n"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
                 + "label all code as java.")),
 
-		SPECIFIC_VARIANTS(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of the following Java method.\n" +
-				"\n" +
-				"Each implementation should try to improve on one different aspect (speed, memory, parallelism, readability, minimal dependencies).\n" +
-				"```\n"
-				+ PromptTag.DESTINATION.withEscape()
-				+ "\n"
-				+ "```\n"
-				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-				+ "Wrap all code in curly braces, if it is not already."
-				+ "Do not include any method or class declarations."
-				+ "label all code as java.")),
+        INSISTENT(new PromptTemplate("Rewrite " + PromptTag.COUNT.withEscape() + " Java code snippets in a way that a highly " +
+                "experienced, top-performing \"10x engineer\" would.  \n" +
+                "\n" +
+                "Aim for code that is not just functional, but also \n" +
+                "exceptionally  efficient, robust, and  concise, even if \n" +
+                "it requires using advanced Java features or less commonly\n" +
+                "known techniques.\n"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "Wrap all code in curly braces, if it is not already."
+                + "Do not include any method or class declarations."
+                + "label all code as java.")),
 
-		GENERAL_VARIANTS(new PromptTemplate("Rewrite this Java method in " + PromptTag.COUNT.withEscape() + " different ways. " +
-				"Each version should be an improvement in some way. Make each one different.\n" +
-				"```\n"
-				+ PromptTag.DESTINATION.withEscape()
-				+ "\n"
-				+ "```\n"
-				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-				+ "Wrap all code in curly braces, if it is not already."
-				+ "Do not include any method or class declarations."
-				+ "label all code as java.")),
+        DETAILED(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "In the org.jcodec.scale.BaseResampler class, the following change was helpful. I changed this:"
+                + "```\n"
+                + "	if (temp == null) {"
+                + "		temp = new int[toSize.getWidth() * (fromSize.getHeight() + nTaps())];"
+                + "		tempBuffers.set(temp);"
+                + "	}"
+                + "```\n"
+                + "into this:"
+                + "```\n"
+                + "	if (temp == null) {"
+                + "		if (scaleFactorX >= 0)"
+                + "			return;"
+                + "		temp = new int[toSize.getWidth() * (fromSize.getHeight() + nTaps())];"
+                + "		tempBuffers.set(temp);"
+                + "	}"
+                + "```\n"
+                + "Wrap all code in curly braces, if it is not already."
+                + "Do not include any method or class declarations."
+                + "label all code as java.")),
+
+        SPECIFIC_VARIANTS(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of the following Java method.\n" +
+                "\n" +
+                "Each implementation should try to improve on one different aspect (speed, memory, parallelism, readability, minimal dependencies).\n" +
+                "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "Wrap all code in curly braces, if it is not already."
+                + "Do not include any method or class declarations."
+                + "label all code as java.")),
+
+        GENERAL_VARIANTS(new PromptTemplate("Rewrite this Java method in " + PromptTag.COUNT.withEscape() + " different ways. " +
+                "Each version should be an improvement in some way. Make each one different.\n" +
+                "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "Wrap all code in curly braces, if it is not already."
+                + "Do not include any method or class declarations."
+                + "label all code as java.")),
+
+        CONTEXT(new PromptTemplate("You are an Automatic Software Improvement tool. Rewrite this Java method in " + PromptTag.COUNT.withEscape() + " different ways. " +
+                "Each version should be an improvement in some way. Make each one different.\n" +
+                "Following statement is the code block to be rewritten.\n" +
+                "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "Here's how the rest of the file looks like:"
+                + "```\n"
+                + PromptTag.HINT.withEscape()
+                + "\n"
+                + "```\n"
+                + "Wrap all code in curly braces, if it is not already."
+                + "Do not include any method or class declarations."
+                + "label all code as java.")),
 
 
+        MASKED(new PromptTemplate("Please replace <<PLACEHOLDER>> sign in the function below with meaningfull implementation. \n"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "Wrap all code in curly braces, if it is not already. "
+                + "Do not include any class declarations. "
+                + "Label all code as java.")),
+        ;
 
-		MASKED(new PromptTemplate("Please replace <<PLACEHOLDER>> sign in the function below with meaningfull implementation. \n"
-				+ "```\n"
-				+ PromptTag.DESTINATION.withEscape()
-				+ "\n"
-				+ "```\n"
-				+ "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-				+ "Wrap all code in curly braces, if it is not already. "
-				+ "Do not include any class declarations. "
-				+ "Label all code as java.")),;
-		
-		
-		
-		public final PromptTemplate template;
-	    private PromptType(PromptTemplate template) {
-	        this.template = template;
-	    }
-	}
-	
+
+        public final PromptTemplate template;
+
+        private PromptType(PromptTemplate template) {
+            this.template = template;
+        }
+    }
+
     // You can use "demo" api key for demonstration purposes.
     public static String openAIKey = "demo";
-    
+
     public static String openAIModelName = OpenAiModelName.GPT_3_5_TURBO;
-    
-    public static String modelType="OpenAI"; // Should be param from c'tor
+
+    public static String modelType = "OpenAI"; // Should be param from c'tor
 
     public static long timeoutInSeconds = 30;
-    
+
     // default for langchain4j
     public static double temperature = 0.7;
-    
+
     public static PromptType defaultPromptType = PromptType.MEDIUM;
-    
+
     public static PromptTemplate defaultPromptTemplate = null;
-    
+
     public static PromptTemplate getDefaultPromptTemplate() {
-    	return (defaultPromptTemplate != null) ? defaultPromptTemplate : defaultPromptType.template;
+        return (defaultPromptTemplate != null) ? defaultPromptTemplate : defaultPromptType.template;
     }
-    
+
     public static String projectName = "";
-    
-    
-    
+
+
 }
