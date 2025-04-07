@@ -34,7 +34,7 @@ public class Ollama4jLLMQuery implements LLMQuery {
         try {
                 // code that might throw OllamaBaseException
                 OllamaResult result =
-                    ollamaAPI.ask(modelType, prompt, new OptionsBuilder().setNumPredict(prompt.length()*2).build());
+                    ollamaAPI.ask(modelType, prompt, new OptionsBuilder().setTemperature((float) LLMConfig.temperature).setNumPredict(prompt.length()*2).build());
                 return result.getResponse();
         } catch (OllamaBaseException e) {
                 // handle the exception

@@ -155,7 +155,7 @@ public class LLMConfig {
     public static long timeoutInSeconds = 30;
 
     // default for langchain4j
-    public static double temperature = 0.7;
+    public static double temperature = 0;
 
     public static PromptType defaultPromptType = PromptType.MEDIUM;
 
