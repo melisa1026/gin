@@ -5,6 +5,9 @@ import org.checkerframework.checker.units.qual.s;
 import dev.langchain4j.model.openai.OpenAiModelName;
 import gin.edit.llm.PromptTemplate.PromptTag;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class LLMConfig {
 
     /**
@@ -108,7 +111,9 @@ public class LLMConfig {
                 "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Here's how the rest of the file looks like:"
                 + "```\n"
-                + PromptTag.HINT.withEscape()
+                + Arrays.stream(PromptTag.HINT.withEscape().split("\\n"))
+                        .filter(line -> Arrays.asList(PromptTag.HINT.withEscape().split("\\n")).indexOf(line) % 2 == 0)
+                        .collect(Collectors.joining("\n"))
                 + "\n"
                 + "```\n" +
                 "Following statement is the code block to be rewritten.\n" +
