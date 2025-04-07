@@ -102,7 +102,10 @@ public abstract class Sampler implements Serializable {
 
     @Argument(alias = "mt", description = "model type; OpenAI  or a name of an ollama model")
     protected String modelType = "OpenAI";
-    
+
+    @Argument(alias = "temp", description = "Temperature value to be used for ollamma")
+    protected String temperature = String.valueOf(0.7);
+
     @Argument(alias = "mo", description = "model timeout in seconds")
     protected Integer modelTimeout = 30;
     
@@ -163,6 +166,7 @@ public abstract class Sampler implements Serializable {
         LLMConfig.timeoutInSeconds = modelTimeout;
         LLMConfig.defaultPromptType = llmPromptType;
         LLMConfig.projectName = projectName;
+        LLMConfig.temperature= Double.parseDouble(temperature);
         LLMConfig.defaultPromptTemplate = llmPromptTemplate.isEmpty() ? null : PromptTemplate.fromFile(llmPromptTemplate); // this will override the prompttype
         // TODO other LLM args
     }
