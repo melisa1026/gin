@@ -36,7 +36,7 @@ public class LLMConfig {
                 + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")),
+                + "label all code as java and write them in codeblocks.")),
 
         INSISTENT(new PromptTemplate("Rewrite " + PromptTag.COUNT.withEscape() + " Java code snippets in a way that a highly " +
                 "experienced, top-performing \"10x engineer\" would.  \n" +
@@ -52,7 +52,7 @@ public class LLMConfig {
                 + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")),
+                + "label all code as java and write them in codeblocks.")),
 
         DETAILED(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of this method body:"
                 + "```\n"
@@ -78,7 +78,7 @@ public class LLMConfig {
                 + "```\n"
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")),
+                + "label all code as java and write them in codeblocks.")),
 
         SPECIFIC_VARIANTS(new PromptTemplate("Give me " + PromptTag.COUNT.withEscape() + " different Java implementations of the following Java method.\n" +
                 "\n" +
@@ -90,7 +90,7 @@ public class LLMConfig {
                 + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")),
+                + "label all code as java and write them in codeblocks.")),
 
         GENERAL_VARIANTS(new PromptTemplate("Rewrite this Java method in " + PromptTag.COUNT.withEscape() + " different ways. " +
                 "Each version should be an improvement in some way. Make each one different.\n" +
@@ -101,24 +101,24 @@ public class LLMConfig {
                 + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")),
+                + "label all code as java and write them in codeblocks.")),
 
         CONTEXT(new PromptTemplate("You are an Automatic Software Improvement tool. Rewrite this Java method in " + PromptTag.COUNT.withEscape() + " different ways. " +
                 "Each version should be an improvement in some way. Make each one different.\n" +
+                "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "Here's how the rest of the file looks like:"
+                + "```\n"
+                + PromptTag.HINT.withEscape()
+                + "\n"
+                + "```\n" +
                 "Following statement is the code block to be rewritten.\n" +
                 "```\n"
                 + PromptTag.DESTINATION.withEscape()
                 + "\n"
                 + "```\n"
-                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-                + "Here's how the rest of the file looks like:"
-                + "```\n"
-                + PromptTag.HINT.withEscape()
-                + "\n"
-                + "```\n"
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
-                + "label all code as java.")),
+                + "label all code as java and write them in codeblocks.")),
 
 
         MASKED(new PromptTemplate("Please replace <<PLACEHOLDER>> sign in the function below with meaningfull implementation. \n"
