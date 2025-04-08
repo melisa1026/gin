@@ -53,17 +53,20 @@ public class LLMConfig {
                 + "label all code as java and write them in codeblocks.")),
 
         NO_SUPERFLOUOUS_IMPROVED(new PromptTemplate(
-                "Respond to the following request by providing multiple variations of the given code snippet, each demonstrating a distinct improvement in terms of readability, efficiency, or functionality. Present each variation enclosed within Java-style curly braces `{}` containing only the code itself, without any surrounding explanations or JSON formatting."
-                +"Provide " + PromptTag.COUNT.withEscape() + " optimized Java implementations of the following method.\n" +
-                "Focus on reducing runtime complexity and memory usage.\n"
-                + "```\n"
-                + PromptTag.DESTINATION.withEscape()
-                + "\n"
-                + "```\n"
-                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-                + "Just write the different codeblocks, no superfluous content, no comments, no explaination. "
-                + "Do not include any method or class declarations."
-                + "label all code as java and write them in codeblocks.")),
+                "Respond to the following request by providing multiple variations of the given code snippet, " +
+                        "each demonstrating a distinct improvement in terms of readability, efficiency, or functionality." +
+                        " Present each variation enclosed within Java-style curly braces `{}` containing only the code itself," +
+                        " without any surrounding explanations or JSON formatting."
+                        + "Provide " + PromptTag.COUNT.withEscape() + " optimized Java implementations of the following method.\n" +
+                        "Focus on reducing runtime complexity and memory usage.\n"
+                        + "```\n"
+                        + PromptTag.DESTINATION.withEscape()
+                        + "\n"
+                        + "```\n"
+                        + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                        + "Just write the different codeblocks, no superfluous content, no comments, no explaination. "
+                        + "Do not include any method or class declarations."
+                        + "label all code as java and write them in codeblocks.")),
 
         INSISTENT(new PromptTemplate("Rewrite " + PromptTag.COUNT.withEscape() + " Java code snippets in a way that a highly " +
                 "experienced, top-performing \"10x engineer\" would.  \n" +
