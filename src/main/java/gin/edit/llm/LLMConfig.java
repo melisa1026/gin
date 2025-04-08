@@ -61,7 +61,6 @@ public class LLMConfig {
                 + "\n"
                 + "```\n"
                 + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
-                + ""
                 + "Just write the different codeblocks, no superfluous content, no comments, no explaination. "
                 + "Do not include any method or class declarations."
                 + "label all code as java and write them in codeblocks.")),
@@ -132,6 +131,7 @@ public class LLMConfig {
                 + "label all code as java and write them in codeblocks.")),
 
         CONTEXT(new PromptTemplate("You are an Automatic Software Improvement tool. Rewrite this Java method in " + PromptTag.COUNT.withEscape() + " different ways. " +
+                "Respond to the following request by providing multiple variations of the given code snippet, each demonstrating a distinct improvement in terms of readability, efficiency, or functionality. Present each variation enclosed within Java-style curly braces `{}` containing only the code itself, without any surrounding explanations or JSON formatting." +
                 "Each version should be an improvement in some way. Make each one different.\n" +
                 "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Here's how the rest of the file looks like:"
@@ -144,6 +144,7 @@ public class LLMConfig {
                 + PromptTag.DESTINATION.withEscape()
                 + "\n"
                 + "```\n"
+                + "Just write the different codeblocks, no superfluous content, no comments, no explaination. "
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
                 + "label all code as java and write them in codeblocks.")),
