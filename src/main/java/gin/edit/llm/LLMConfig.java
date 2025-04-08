@@ -136,9 +136,7 @@ public class LLMConfig {
                 "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
                 + "Here's how the rest of the file looks like:"
                 + "```\n"
-                + Arrays.stream(PromptTag.HINT.withEscape().split("\\n"))
-                .filter(line -> Arrays.asList(PromptTag.HINT.withEscape().split("\\n")).indexOf(line) % 2 == 0)
-                .collect(Collectors.joining("\n"))
+                + PromptTag.HINT.withEscape()
                 + "\n"
                 + "```\n" +
                 "Following statement is the code block to be rewritten.\n" +
