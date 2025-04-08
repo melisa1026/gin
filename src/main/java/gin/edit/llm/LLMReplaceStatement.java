@@ -156,9 +156,9 @@ public class LLMReplaceStatement extends StatementEdit {
 	    	tagReplacements.put(PromptTag.COUNT, Integer.toString(count));
 	    	tagReplacements.put(PromptTag.DESTINATION, destination.toString());
 	    	tagReplacements.put(PromptTag.PROJECT, LLMConfig.projectName);
-			String answer = llmQuery.chatLLM("Analyze the following source code to extract key information relevant for understanding its functionality and context, with a critical focus on accurately capturing the names and full signatures (return types and parameter types) of all publicly accessible classes, methods, and fields. Identify the main purpose of the code, the core data structures and algorithms used, and any significant external dependencies or libraries. Summarize this information concisely, ensuring all names and signatures are precisely recorded, to provide comprehensive context for subsequent code generation or integration tasks. The result is to be processed by a machine no need for human niceties\n" +
+			String hint = llmQuery.chatLLM("Analyze the following source code to extract key information relevant for understanding its functionality and context, with a critical focus on accurately capturing the names and full signatures (return types and parameter types) of all publicly accessible classes, methods, and fields. Identify the main purpose of the code, the core data structures and algorithms used, and any significant external dependencies or libraries. Summarize this information concisely, ensuring all names and signatures are precisely recorded, to provide comprehensive context for subsequent code generation or integration tasks. The result is to be processed by a machine no need for human niceties\n" +
 					"\n"+sourceFile.getSource());
-			tagReplacements.put(PromptTag.HINT, answer);
+			tagReplacements.put(PromptTag.HINT, hint);
 
 	    	String prompt = promptTemplate.replaceTags(tagReplacements);
 	
