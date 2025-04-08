@@ -112,7 +112,7 @@ public class LLMReplaceStatement extends StatementEdit {
 
     @Override
     public SourceFile apply(SourceFile sourceFile, Object tagReplacements) {
-    	List<SourceFile> l = applyMultiple(sourceFile, 1, (Map<PromptTemplate.PromptTag,String>)tagReplacements);
+    	List<SourceFile> l = applyMultiple(sourceFile, 5, (Map<PromptTemplate.PromptTag,String>)tagReplacements);
 
     	if (l.size() > 0) {
     		return l.get(0); // TODO for now, just pick the first variant provided. Later, call applyMultiple from LocalSearch instead

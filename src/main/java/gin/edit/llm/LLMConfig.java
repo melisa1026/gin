@@ -40,6 +40,31 @@ public class LLMConfig {
                 + "Wrap all code in curly braces, if it is not already."
                 + "Do not include any method or class declarations."
                 + "label all code as java and write them in codeblocks.")),
+        NO_SUPERFLOUOUS(new PromptTemplate("Provide " + PromptTag.COUNT.withEscape() + " optimized Java implementations of the following method.\n" +
+                "Focus on reducing runtime complexity and memory usage.\n"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + "Wrap all code in curly braces, if it is not already."
+                + " Just write the different codeblocks, no superfluous content, no comments, no explaination. "
+                + "Do not include any method or class declarations."
+                + "label all code as java and write them in codeblocks.")),
+
+        NO_SUPERFLOUOUS_IMPROVED(new PromptTemplate(
+                "Respond to the following request by providing multiple variations of the given code snippet, each demonstrating a distinct improvement in terms of readability, efficiency, or functionality. Present each variation enclosed within Java-style curly braces `{}` containing only the code itself, without any surrounding explanations or JSON formatting."
+                +"Provide " + PromptTag.COUNT.withEscape() + " optimized Java implementations of the following method.\n" +
+                "Focus on reducing runtime complexity and memory usage.\n"
+                + "```\n"
+                + PromptTag.DESTINATION.withEscape()
+                + "\n"
+                + "```\n"
+                + "This code belongs to project " + PromptTag.PROJECT.withEscape() + ". "
+                + ""
+                + "Just write the different codeblocks, no superfluous content, no comments, no explaination. "
+                + "Do not include any method or class declarations."
+                + "label all code as java and write them in codeblocks.")),
 
         INSISTENT(new PromptTemplate("Rewrite " + PromptTag.COUNT.withEscape() + " Java code snippets in a way that a highly " +
                 "experienced, top-performing \"10x engineer\" would.  \n" +
@@ -112,8 +137,8 @@ public class LLMConfig {
                 + "Here's how the rest of the file looks like:"
                 + "```\n"
                 + Arrays.stream(PromptTag.HINT.withEscape().split("\\n"))
-                        .filter(line -> Arrays.asList(PromptTag.HINT.withEscape().split("\\n")).indexOf(line) % 2 == 0)
-                        .collect(Collectors.joining("\n"))
+                .filter(line -> Arrays.asList(PromptTag.HINT.withEscape().split("\\n")).indexOf(line) % 2 == 0)
+                .collect(Collectors.joining("\n"))
                 + "\n"
                 + "```\n" +
                 "Following statement is the code block to be rewritten.\n" +
